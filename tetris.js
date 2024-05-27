@@ -6,8 +6,6 @@ const FIELD_HEIGHT = 18;
 
 const SCALE = 10;
 
-let rotation = 12;
-
 canvas.width = FIELD_WIDTH*SCALE;
 canvas.height = FIELD_HEIGHT*SCALE;
 canvas.style.backgroundColor = "black";
@@ -85,12 +83,32 @@ function rotate(px, py, rotation) {
     return 0;
 }
 
+let rotation = 13;
+let currentTile = tetrominos[1];
+let currentX = 1;
+let currentY = -4;
+
 function gameLoop() {
-    setInterval(update(), 500);
+    setInterval(update, 1000);
+
+
 }
 
 //move piece down by 1. If it touches something below it, make a new piece.
 function update(){
+    for (let i = 0; i < 16; i++) {
+        let tx = i % 4;
+        let ty = Math.floor(i/4);
+        let tpi = rotate(tx,ty, rotation);
+        let tp = currentTile[tpi];
+        let fi = currentX + tx + currentY*FIELD_WIDTH + ty * FIELD_WIDTH
+        if (fi > 0) field[fi] = tp;
+    }
+    currentY ++;
+    updateDisplay();
+}
+
+function checkTetris() {
 
 }
 
@@ -183,9 +201,7 @@ function rotatePiece(rotation){
 
 }
 
-field[4] = "B";
-field[7] = "Y";
-field[16] = "G";
-
 
 updateDisplay();
+
+gameLoop()
