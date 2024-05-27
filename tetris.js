@@ -9,7 +9,6 @@ canvas.height = FIELD_HEIGHT;
 
 let field = new Array(FIELD_WIDTH * FIELD_HEIGHT);
 
-
 (function initializeField(){
     for (let i = 0; i < field.length; i++) {
         let fy = Math.floor(i/FIELD_WIDTH);
@@ -33,41 +32,43 @@ function printField() {
 }
 
 let tetrominos = ["","","","","","",""];
+(function initializeTetrominos(){
+    tetrominos[0] += "..T.";
+    tetrominos[0] += "..T.";
+    tetrominos[0] += "..T.";
+    tetrominos[0] += "..T.";
 
-tetrominos[0] += "..T.";
-tetrominos[0] += "..T.";
-tetrominos[0] += "..T.";
-tetrominos[0] += "..T.";
+    tetrominos[1] += "..R.";
+    tetrominos[1] += ".RR.";
+    tetrominos[1] += ".R..";
+    tetrominos[1] += "....";
 
-tetrominos[1] += "..R.";
-tetrominos[1] += ".RR.";
-tetrominos[1] += ".R..";
-tetrominos[1] += "....";
+    tetrominos[2] += ".G..";
+    tetrominos[2] += ".GG.";
+    tetrominos[2] += "..G.";
+    tetrominos[2] += "....";
 
-tetrominos[2] += ".G..";
-tetrominos[2] += ".GG.";
-tetrominos[2] += "..G.";
-tetrominos[2] += "....";
+    tetrominos[3] += "....";
+    tetrominos[3] += ".YY.";
+    tetrominos[3] += ".YY.";
+    tetrominos[3] += "....";
 
-tetrominos[3] += "....";
-tetrominos[3] += ".YY.";
-tetrominos[3] += ".YY.";
-tetrominos[3] += "....";
+    tetrominos[4] += "..P.";
+    tetrominos[4] += ".PP.";
+    tetrominos[4] += "..P.";
+    tetrominos[4] += "....";
 
-tetrominos[4] += "..P.";
-tetrominos[4] += ".PP.";
-tetrominos[4] += "..P.";
-tetrominos[4] += "....";
+    tetrominos[5] += "....";
+    tetrominos[5] += ".OO.";
+    tetrominos[5] += "..O.";
+    tetrominos[5] += "..O.";
 
-tetrominos[5] += "....";
-tetrominos[5] += ".OO.";
-tetrominos[5] += "..O.";
-tetrominos[5] += "..O.";
+    tetrominos[6] += "....";
+    tetrominos[6] += ".BB.";
+    tetrominos[6] += ".B..";
+    tetrominos[6] += ".B..";
+})();
 
-tetrominos[6] += "....";
-tetrominos[6] += ".BB.";
-tetrominos[6] += ".B..";
-tetrominos[6] += ".B..";
 
 function rotate(px, py, rotation) {
     switch (rotation % 4){
@@ -92,9 +93,19 @@ function update(){
 function updateDisplay() {
 
 }
+
+function checkPieceCollision() {
+
+}
+
 function newPiece(){
 
 }
+
+function checkGameEnd(){
+
+}
+
 
 document.onkeydown = (e) =>{
     switch (e.key){
