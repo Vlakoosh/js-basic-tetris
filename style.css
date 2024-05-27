@@ -14,4 +14,7 @@
 
 #canvas {
     background-color: whitesmoke;
+    width: 240px;
+    height: 360px;
+    image-rendering: pixelated;
 }

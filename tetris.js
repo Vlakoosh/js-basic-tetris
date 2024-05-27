@@ -1,8 +1,11 @@
-// const canvas = document.getElementById("canvas");
-// const ctx = canvas.getContext("2d");
+const canvas = document.getElementById("canvas");
+const ctx = canvas.getContext("2d");
 
 const FIELD_WIDTH = 12;
 const FIELD_HEIGHT = 18;
+
+canvas.width = FIELD_WIDTH;
+canvas.height = FIELD_HEIGHT;
 
 let field = new Array(FIELD_WIDTH * FIELD_HEIGHT);
 
@@ -28,44 +31,43 @@ function printField() {
 
     }
 }
-printField();
 
 let tetrominos = ["","","","","","",""];
 
-tetrominos[0] += "..X.";
-tetrominos[0] += "..X.";
-tetrominos[0] += "..X.";
-tetrominos[0] += "..X.";
+tetrominos[0] += "..T.";
+tetrominos[0] += "..T.";
+tetrominos[0] += "..T.";
+tetrominos[0] += "..T.";
 
-tetrominos[1] += "..X.";
-tetrominos[1] += ".XX.";
-tetrominos[1] += ".X..";
+tetrominos[1] += "..R.";
+tetrominos[1] += ".RR.";
+tetrominos[1] += ".R..";
 tetrominos[1] += "....";
 
-tetrominos[2] += ".X..";
-tetrominos[2] += ".XX.";
-tetrominos[2] += "..X.";
+tetrominos[2] += ".G..";
+tetrominos[2] += ".GG.";
+tetrominos[2] += "..G.";
 tetrominos[2] += "....";
 
 tetrominos[3] += "....";
-tetrominos[3] += ".XX.";
-tetrominos[3] += ".XX.";
+tetrominos[3] += ".YY.";
+tetrominos[3] += ".YY.";
 tetrominos[3] += "....";
 
-tetrominos[4] += "..X.";
-tetrominos[4] += ".XX.";
-tetrominos[4] += "..X.";
+tetrominos[4] += "..P.";
+tetrominos[4] += ".PP.";
+tetrominos[4] += "..P.";
 tetrominos[4] += "....";
 
 tetrominos[5] += "....";
-tetrominos[5] += ".XX.";
-tetrominos[5] += "..X.";
-tetrominos[5] += "..X.";
+tetrominos[5] += ".OO.";
+tetrominos[5] += "..O.";
+tetrominos[5] += "..O.";
 
 tetrominos[6] += "....";
-tetrominos[6] += ".XX.";
-tetrominos[6] += ".X..";
-tetrominos[6] += ".X..";
+tetrominos[6] += ".BB.";
+tetrominos[6] += ".B..";
+tetrominos[6] += ".B..";
 
 function rotate(px, py, rotation) {
     switch (rotation % 4){
@@ -75,4 +77,51 @@ function rotate(px, py, rotation) {
         case 3: return 3 - py + (px * 4);   //270 degrees
     }
     return 0;
+}
+
+function gameLoop() {
+    setInterval(update(), 500);
+}
+
+//move piece down by 1. If it touches something below it, make a new piece.
+function update(){
+
+}
+
+//print everything to the screen/canvas
+function updateDisplay() {
+
+}
+function newPiece(){
+
+}
+
+document.onkeydown = (e) =>{
+    switch (e.key){
+        case "ArrowLeft":
+            movePiece(-1);
+            updateDisplay();
+            break;
+        case "ArrowRight":
+            movePiece(1);
+            updateDisplay();
+            break;
+        case "ArrowDown":
+            movePiece(0, 1);
+            updateDisplay();
+        case "A":
+            rotatePiece(-1);
+            updateDisplay();
+        case "D":
+            rotatePiece(1);
+            updateDisplay();
+    }
+}
+
+function movePiece(x, y=0){
+
+}
+
+function rotatePiece(rotation){
+
 }
