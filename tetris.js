@@ -84,8 +84,8 @@ function rotate(px, py, rotation) {
 }
 
 let rotation = 13;
-let currentTile = tetrominos[1];
-let currentX = 1;
+let currentTile = tetrominos[6];
+let currentX = 4;
 let currentY = -4;
 
 function gameLoop() {
@@ -96,16 +96,81 @@ function gameLoop() {
 
 //move piece down by 1. If it touches something below it, make a new piece.
 function update(){
-    for (let i = 0; i < 16; i++) {
+    putTile(0,1, 0);
+    updateDisplay();
+}
+
+function clearPiece(){
+    for (let i = 15; i >= 0; i--) {
         let tx = i % 4;
         let ty = Math.floor(i/4);
         let tpi = rotate(tx,ty, rotation);
         let tp = currentTile[tpi];
         let fi = currentX + tx + currentY*FIELD_WIDTH + ty * FIELD_WIDTH
-        if (fi > 0) field[fi] = tp;
+        if (fi > 0) {
+            if (field[fi] === tp){
+                field[fi] = " ";
+            }
+        }
     }
-    currentY ++;
-    updateDisplay();
+}
+
+function putPiece(){
+    for (let i = 15; i >= 0; i--) {
+        let tx = i % 4;
+        let ty = Math.floor(i/4);
+        let tpi = rotate(tx,ty, rotation);
+        let tp = currentTile[tpi];
+        let fi = currentX + tx + currentY*FIELD_WIDTH + ty * FIELD_WIDTH
+
+        if (fi > 0) {
+            if (tp != "."){
+                field[fi] = tp;
+            }
+        }
+    }
+}
+
+function putTile(x, y, r){
+    clearPiece()
+    currentY += y;
+    currentX += x;
+    rotation += r;
+
+    for (let i = 15; i >= 0; i--) {
+        let tx = i % 4;
+        let ty = Math.floor(i/4);
+        let fi = currentX + tx + currentY*FIELD_WIDTH + ty * FIELD_WIDTH
+        let tpi = rotate(tx,ty, rotation);
+        let tp = currentTile[tpi];
+        if (fi > 0) {
+            if (field[fi] != " " && tp != ".") {
+                currentY -= y;
+                currentX -= x;
+                rotation -= r;
+                putPiece();
+                if (y > 0){
+                    newPiece();
+                }
+                return;
+            }
+
+        }
+    }
+
+    currentY -= y;
+    currentX -= x;
+    rotation -= r;
+
+    clearPiece()
+    console.log(field);
+    currentY += y;
+    currentX += x;
+    rotation += r;
+    if (rotation < 0 ) rotation = 3;
+
+    putPiece();
+
 }
 
 function checkTetris() {
@@ -114,6 +179,8 @@ function checkTetris() {
 
 //print everything to the screen/canvas
 function updateDisplay() {
+    ctx.fillStyle = "black";
+    ctx.fillRect(0,0,FIELD_WIDTH * SCALE, FIELD_HEIGHT * SCALE);
     for (let i = 0; i < field.length; i++) {
         let fx = i % FIELD_WIDTH;
         let fy = Math.floor(i / FIELD_WIDTH);
@@ -160,7 +227,9 @@ function checkPieceCollision() {
 }
 
 function newPiece(){
-
+    currentTile = tetrominos[Math.floor(Math.random()*tetrominos.length)];
+    currentY = -4;
+    currentX = 4;
 }
 
 function checkGameEnd(){
@@ -182,11 +251,11 @@ document.onkeydown = (e) =>{
             movePiece(0, 1);
             updateDisplay();
             break;
-        case "A":
+        case "a":
             rotatePiece(-1);
             updateDisplay();
             break;
-        case "D":
+        case "d":
             rotatePiece(1);
             updateDisplay();
             break;
@@ -194,11 +263,11 @@ document.onkeydown = (e) =>{
 }
 
 function movePiece(x, y=0){
-
+    putTile(x,y, 0);
 }
 
 function rotatePiece(rotation){
-
+    putTile(0,0,rotation);
 }
 
 
