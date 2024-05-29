@@ -90,8 +90,6 @@ let currentY = -4;
 
 function gameLoop() {
     setInterval(update, 1000);
-
-
 }
 
 //move piece down by 1. If it touches something below it, make a new piece.
@@ -154,7 +152,6 @@ function putTile(x, y, r){
                 }
                 return;
             }
-
         }
     }
 
@@ -170,7 +167,6 @@ function putTile(x, y, r){
     if (rotation < 0 ) rotation = 3;
 
     putPiece();
-
 }
 
 function checkTetris() {
