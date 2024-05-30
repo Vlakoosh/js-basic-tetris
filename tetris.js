@@ -149,6 +149,7 @@ function putTile(x, y, r){
                 putPiece();
                 if (y > 0){
                     newPiece();
+                    checkTetris();
                 }
                 return;
             }
@@ -160,7 +161,6 @@ function putTile(x, y, r){
     rotation -= r;
 
     clearPiece()
-    console.log(field);
     currentY += y;
     currentX += x;
     rotation += r;
@@ -170,7 +170,7 @@ function putTile(x, y, r){
 }
 
 function checkTetris() {
-    for (let row = 0; row < FIELD_HEIGHT; row++){
+    for (let row = 0; row < FIELD_HEIGHT - 1; row++){
         let tetris = true;
         for (let column = 0; column < FIELD_WIDTH; column++){
             if (field[row*FIELD_WIDTH + column] === " "){
@@ -180,14 +180,27 @@ function checkTetris() {
         }
         if (tetris){
             console.log("tetris");
+            deleteRow(row);
             movePiecesDown(row);
-            break;
         }
     }
 }
 
-function movePiecesDown(){
+function deleteRow(row){
+    for (let column = 1; column < FIELD_WIDTH - 1; column++) {
+        field[row * FIELD_WIDTH + column] = " ";
+        console.log("deleted pieces");
+    }
+}
 
+function movePiecesDown(row){
+    for (let y = row; y > 0; y--){
+        for (let x = 1; x < FIELD_WIDTH - 1; x++){
+            let index = y * FIELD_WIDTH + x;
+            let nextIndex = index - FIELD_WIDTH;
+            field[index] = field[nextIndex];
+        }
+    }
 }
 
 //print everything to the screen/canvas
