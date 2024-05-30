@@ -170,6 +170,23 @@ function putTile(x, y, r){
 }
 
 function checkTetris() {
+    for (let row = 0; row < FIELD_HEIGHT; row++){
+        let tetris = true;
+        for (let column = 0; column < FIELD_WIDTH; column++){
+            if (field[row*FIELD_WIDTH + column] === " "){
+                tetris = false;
+                break;
+            }
+        }
+        if (tetris){
+            console.log("tetris");
+            movePiecesDown(row);
+            break;
+        }
+    }
+}
+
+function movePiecesDown(){
 
 }
 
