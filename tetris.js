@@ -2,8 +2,8 @@
 const canvas = document.getElementById("canvas");
 const ctx = canvas.getContext("2d");
 
-const FIELD_WIDTH = 12;
-const FIELD_HEIGHT = 18;
+const FIELD_WIDTH = 15;
+const FIELD_HEIGHT = 20;
 
 const SCALE = 10;
 
@@ -247,10 +247,6 @@ function drawBlock(x,y,color){
     ctx.fillRect(x * SCALE+1 , y * SCALE+1, SCALE -2, SCALE-2);
     ctx.fillStyle = "black";
     ctx.fillRect(x * SCALE + 2 , y * SCALE + 2, SCALE - 4, SCALE - 4);
-}
-
-function checkPieceCollision() {
-
 }
 
 function newPiece(){
