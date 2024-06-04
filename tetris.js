@@ -2,8 +2,8 @@
 const canvas = document.getElementById("canvas");
 const ctx = canvas.getContext("2d");
 
-const FIELD_WIDTH = 15;
-const FIELD_HEIGHT = 20;
+const FIELD_WIDTH = 12;
+const FIELD_HEIGHT = 18;
 
 const SCALE = 10;
 
